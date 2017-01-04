@@ -55,6 +55,20 @@ export default class NumberGuesser extends React.Component {
     })
   }
 
+  increaseDifficulty(){
+    this.setState({
+      min: +this.state.min - 10,
+      max: +this.state.max + 10,
+    })
+  }
+
+  getNewNumber(){
+    this.setState({
+      answer: this.randomNumber()
+    })
+  }
+
+
   returnGuess(){
     if(this.state.lastGuess === ''){
       return(
@@ -92,6 +106,7 @@ export default class NumberGuesser extends React.Component {
   }
 
   render(){
+    console.log(this.state.answer);
     return (
       <section className="NumberGuesser">
         <header><h1><span id="number">Number</span><span id="guesser">Guesser</span></h1></header>
@@ -107,6 +122,7 @@ export default class NumberGuesser extends React.Component {
             updateGuess={this.updateGuess}
           />
           <SubmitBtn
+            buttonDisabled={!this.state.guess}
             submitBtn = {this.submitBtn}
           />
           <ResetBtn
